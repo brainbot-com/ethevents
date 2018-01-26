@@ -30,7 +30,7 @@ def help():
     print(
         'Welcome to the eth.events interactive shell.\n'
         'Use {b}es{n} to perform Elasticsearch queries.\n'
-        'Use {b}ee{n} to manage your µRaiden channel and account.\n'
+        'Use {b}ee.account{n} to manage your µRaiden channel and account.\n'
         'You can find sample queries in the {b}queries{n} and {b}plots{n} modules.'.format(
             b=TermColors.Blue,
             n=TermColors.Normal
