@@ -72,8 +72,7 @@ The ipython `?` operator is helpful to determine the available arguments for an 
 
 will output:
 
-    Signature: queries.caller_for_event(event_sig='0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-time_range={'gt': 0}, num_callers=10)
+    Signature: queries.caller_for_event(event_sig='0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef', time_range={'gt': 0}, num_callers=10)
     Docstring:
     This query aggregates the most common caller addresses for all transactions
     that lead to a certain `event_sig` topic:
