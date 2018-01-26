@@ -11,7 +11,8 @@ The remainder of the README will focus on the user side / client library of the 
 
 ## Requirements
 Installation needs `python3`.
-Runtime needs an Ethereum blockchain client connected with `rpc` enabled.
+
+Runtime needs an Ethereum blockchain client with `rpc` enabled.
 
 ## Installation
 Clone this repository and run
