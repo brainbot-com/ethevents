@@ -17,6 +17,15 @@ class UI(AccountUI):
         AccountUI.__init__(self, app)
 
 
+class UserNamespace(object):
+    """Simple class to bundle all user namespace objects for easier discovery"""
+    def __init__(self, es, queries, plots, account):
+        self.es = es
+        self.queries = queries
+        self.plots = plots
+        self.account = account
+
+
 def help():
     print(
         'Welcome to the eth.events interactive shell.\n'
@@ -31,7 +40,8 @@ def help():
 
 @click.option(
     '--limits/--no-limits',
-    default=True
+    default=True,
+    help="Use '--no-limits' to disable the funding security limits (not recommended!)"
 )
 @click.command()
 def main(limits: bool):
@@ -42,22 +52,26 @@ def main(limits: bool):
 
     ui = UI(app)
     ui_methods = {
-        'ee_{}'.format(method_name): method
+        '{}'.format(method_name): method
         for method_name, method in inspect.getmembers(ui, predicate=inspect.ismethod)
         if '__' not in method_name[:2]
     }
     if proxy is not None:
-        ee_queries = ethevents.examples.queries
-        ee_plots = ethevents.examples.plots
-        ee_es = Elasticsearch(['http://localhost:5478'], timeout=30)
+        queries = ethevents.examples.queries
+        plots = ethevents.examples.plots
+        es = Elasticsearch(['http://localhost:5478'], timeout=30)
+        ee = UserNamespace(
+            es,
+            queries,
+            plots,
+            ui
+        )
         IPython.start_ipython(
             user_ns=dict(
-                ee_queries=ee_queries,
-                ee_plots=ee_plots,
-                ee_es=ee_es,
-                es=ee_es,
-                queries=ee_queries,
-                plots=ee_plots,
+                ee=ee,
+                es=es,
+                queries=queries,
+                plots=plots,
                 **ui_methods,
                 help=help
             ),
