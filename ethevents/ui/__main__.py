@@ -67,7 +67,7 @@ def main(limits: bool, corsdomain: str):
     if proxy is not None:
         queries = ethevents.examples.queries
         plots = ethevents.examples.plots
-        es = Elasticsearch(['http://localhost:5478'], timeout=30)
+        es = Elasticsearch(['http://localhost:5478'], timeout=60)
         ee = UserNamespace(
             es,
             queries,
