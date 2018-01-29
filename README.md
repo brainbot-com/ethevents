@@ -97,7 +97,8 @@ Calling
 will for example aggregate the ten most common account addresses that generated an ERC20 transfer
 event in the last hour (opposed to the default value, "since all time", `'gt': 0`).
 
-Please refer to the elasticsearch documentation if you want to learn more about the Query DSL.
+Please refer to the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl.html)
+if you want to learn more about the Query DSL.
 
 ### Using the proxy server
 Once the client is running, it exposes a forward proxy at http://localhost:5478 to the Elasticsearch
@@ -112,4 +113,3 @@ proxy.
 
 The client proxy implementation will automatically forward, **and pay for**, requests to the blockchain
 index.
-
