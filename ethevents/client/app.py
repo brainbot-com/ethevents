@@ -30,7 +30,7 @@ log = logging.getLogger(__name__)
 
 
 class uCustomSession(uSession):
-    def __init__(self, max_rei_per_request: int = 20000, *args, **kwargs) -> None:
+    def __init__(self, max_rei_per_request: int = 50000, *args, **kwargs) -> None:
         uSession.__init__(self, *args, **kwargs)
         self.max_rei_per_request = max_rei_per_request
         self.paid = False
@@ -101,7 +101,7 @@ class App(object):
             self,
             ignore_security_limits: bool = False,
             endpoint_url: str = None,
-            max_rei_per_request: int = 20000
+            max_rei_per_request: int = 50000
     ):
         self.account_manager.load_accounts()
 
