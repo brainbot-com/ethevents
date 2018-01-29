@@ -106,7 +106,7 @@ def run_proxy(
         log.info('CORS was enabled for {}'.format(cors_enabled))
 
     print('Starting eth.events proxy server.')
-    server = WSGIServer((proxy_listen_address, proxy_port), app)
+    server = WSGIServer((proxy_listen_address, proxy_port), app, log=log, error_log=log)
     server_greenlet = gevent.spawn(server.serve_forever)
 
     return server, server_greenlet, client_app

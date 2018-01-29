@@ -32,7 +32,7 @@ class ExpensiveElasticsearch(Expensive):
     def get_request_key(request: request) -> int:
         # FIXME: this assumes that serialized json data doesn't change order between requests
         # it's a compromise to make NDJSON _msearch requests work (otherwise we could
-        # explicitely dump json with `sort_keys=True`.
+        # explicitely dump json with `sort_keys=True`).
         data = request.get_data()
         request_key = hash((
             request.method.lower(),
