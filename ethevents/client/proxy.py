@@ -4,6 +4,7 @@ from flask import Flask, request, Response
 from flask_restful import Api, Resource
 from flask_cors import CORS
 from gevent import monkey
+from gevent.lock import Semaphore
 from gevent.pywsgi import WSGIServer
 
 from requests import Session
@@ -19,40 +20,42 @@ monkey.patch_all(thread=False)
 
 
 class Forwarder(Resource):
-    def __init__(self, session: Session, base_url='http://localhost'):
+    def __init__(self, session: Session, base_url='http://localhost', semaphore=None):
         self.session = session
         self.base_url = base_url
+        self.semaphore = semaphore
 
     def default(self, *args, **kwargs):
-        data = request.get_data()
-        url = self.base_url + request.path
-        log.debug('{} {} {}'.format(url, data, request.headers))
-        # sanitize headers (Host and Accept confuse the remote)
-        headers = {key: request.headers.get(key) for key in request.headers.keys()}
-        headers.pop('Host')
-        if 'Accept' in headers.keys():
-            headers.pop('Accept')
-        response = self.session.request(
-            request.method,
-            url.strip('/'),
-            params=request.query_string or None,
-            data=data,
-            headers=headers,
-            timeout=30,
-        )
-        forwarded_headers = {
-            header: value for header, value in response.headers.items()
-            if 'content-length' not in header.lower()
-        }
-        content = response.text
-        log.debug('content {}'.format(content))
-        log.info('headers {}'.format(response.headers))
-        return Response(
-            content,
-            mimetype=forwarded_headers.get('Content-type'),
-            status=response.status_code,
-            headers=forwarded_headers
-        )
+        with self.semaphore:
+            data = request.get_data()
+            url = self.base_url + request.path
+            log.debug('{} {} {}'.format(url, data, request.headers))
+            # sanitize headers (Host and Accept confuse the remote)
+            headers = {key: request.headers.get(key) for key in request.headers.keys()}
+            headers.pop('Host')
+            if 'Accept' in headers.keys():
+                headers.pop('Accept')
+            response = self.session.request(
+                request.method,
+                url.strip('/'),
+                params=request.query_string or None,
+                data=data,
+                headers=headers,
+                timeout=30,
+            )
+            forwarded_headers = {
+                header: value for header, value in response.headers.items()
+                if 'content-length' not in header.lower()
+            }
+            content = response.text
+            log.debug('content {}'.format(content))
+            log.info('headers {}'.format(response.headers))
+            return Response(
+                content,
+                mimetype=forwarded_headers.get('Content-type'),
+                status=response.status_code,
+                headers=forwarded_headers
+            )
 
     def get(self, *args, **kwargs):
         return self.default(*args, **kwargs)
@@ -85,6 +88,8 @@ def run_proxy(
 
     api = Api(app)
 
+    semaphore = Semaphore()
+
     api.add_resource(
         Forwarder,
         '/<part1>',
@@ -92,7 +97,8 @@ def run_proxy(
         '/<part1>/<part2>/<part3>',
         resource_class_kwargs=dict(
             session=client_app.session,
-            base_url=endpoint_url
+            base_url=endpoint_url,
+            semaphore=semaphore
         )
     )
     if corsdomain is not None:
