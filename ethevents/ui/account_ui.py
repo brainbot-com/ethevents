@@ -27,6 +27,13 @@ class AccountUI(object):
         self.app.account.sync_balances()
         return self.app.account.wei_balance
 
+    def rdn_balance(self) -> int:
+        """
+        Check the RDN balance in Rei of the current account.
+        """
+        self.app.account.sync_balances()
+        return self.app.account.rei_balance
+
     def close_channel(self):
         """
         Closes the µRaiden channel to the server by requesting a closing signature from the server.
