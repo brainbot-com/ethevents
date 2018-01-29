@@ -8,6 +8,7 @@ from elasticsearch import Elasticsearch
 from ethevents import App
 from ethevents.client.proxy import run_proxy
 from ethevents.ui.account_ui import AccountUI
+from ethevents.util import EventABI
 import ethevents.examples.queries
 import ethevents.examples.plots
 
@@ -24,6 +25,7 @@ class UserNamespace(object):
         self.queries = queries
         self.plots = plots
         self.account = account
+        self.event_helper = EventABI
 
 
 def help():
