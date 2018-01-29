@@ -34,7 +34,7 @@ class Forwarder(Resource):
             headers.pop('Accept')
         response = self.session.request(
             request.method,
-            url,
+            url.strip('/'),
             params=request.query_string or None,
             data=data,
             headers=headers,
@@ -80,6 +80,9 @@ def run_proxy(
             return None, None, None
 
     app = Flask(__name__)
+
+    app.url_map.strict_slashes = False
+
     api = Api(app)
 
     api.add_resource(
