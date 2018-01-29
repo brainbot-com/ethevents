@@ -43,11 +43,17 @@ def help():
     default=True,
     help="Use '--no-limits' to disable the funding security limits (not recommended!)"
 )
+@click.option(
+    '--corsdomain',
+    default=None,
+    help="Enable CORS headers for domain"
+)
 @click.command()
-def main(limits: bool):
+def main(limits: bool, corsdomain: str):
     proxy, proxy_greenlet, app = run_proxy(
         endpoint_url='https://api.eth.events',
-        ignore_security_limits=not limits
+        ignore_security_limits=not limits,
+        corsdomain=corsdomain,
     )
 
     ui = UI(app)

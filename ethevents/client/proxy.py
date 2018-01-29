@@ -2,6 +2,7 @@ import click
 import gevent
 from flask import Flask, request, Response
 from flask_restful import Api, Resource
+from flask_cors import CORS
 from gevent import monkey
 from gevent.pywsgi import WSGIServer
 
@@ -65,6 +66,7 @@ def run_proxy(
         endpoint_url: str = 'https://api.eth.events',
         proxy_listen_address: str = 'localhost',
         proxy_port: int = 5478,
+        corsdomain=None,
         **kwargs
 ):
     if client_app is None:
@@ -90,6 +92,9 @@ def run_proxy(
             base_url=endpoint_url
         )
     )
+    if corsdomain is not None:
+        cors_enabled = CORS(app, resources={'/*': {"origins": corsdomain}})
+        log.info('CORS was enabled for {}'.format(cors_enabled))
 
     print('Starting eth.events proxy server.')
     server = WSGIServer((proxy_listen_address, proxy_port), app)

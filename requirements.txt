@@ -11,3 +11,4 @@ units
 pytz
 microraiden
 ipython
+flask_cors
