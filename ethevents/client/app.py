@@ -1,3 +1,5 @@
+from gevent import monkey       # see https://github.com/gevent/gevent/issues/941
+monkey.patch_all(thread=False)  # monkey patch needs to happen before `import requests`
 import logging
 
 import click
