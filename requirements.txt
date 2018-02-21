@@ -12,3 +12,4 @@ pytz
 microraiden>0.2.0,<0.3.0
 ipython
 flask_cors
+eth-tester==0.1.0b5
