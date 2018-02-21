@@ -224,18 +224,20 @@ def test_account_manager_cli_generate(
 
     manager = AccountManagerCLI(keystore_path)
     account = manager.select_account()
-    assert account.unlocked
+    assert account.locked
     assert len(manager.accounts) == 1
     assert len(glob.glob(os.path.join(keystore_path, '*'))) == 1
 
-    # Wrong password but ignored.
-    account.unlock(passwords[1])
-
-    account.lock()
     with pytest.raises(ValueError):
         # Wrong password.
         account.unlock(passwords[1])
     account.unlock(passwords[i])
+
+    # Wrong password but ignored.
+    try:
+        account.unlock(passwords[1])
+    except ValueError:
+        assert False, "Already unlocked account is supposed to ignore wrong password."
 
 
 def test_account_manager_cli_select(
