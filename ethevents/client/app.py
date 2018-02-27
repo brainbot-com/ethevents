@@ -50,10 +50,6 @@ class uCustomSession(uSession):
         return uSession.on_invalid_amount(self, method, url, response, **kwargs)
 
     def on_payment_requested(self, method: str, url: str, response: Response, **kwargs) -> bool:
-        if self.paid:
-            log.error('Already paid for requested resource. Aborting.')
-            return False
-
         price = int(response.headers[HTTPHeaders.PRICE])
         if price > self.max_rei_per_request:
             log.error(
