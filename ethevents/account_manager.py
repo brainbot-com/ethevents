@@ -46,7 +46,8 @@ class Account(object):
             password: str = None,
             keyfile_content: KeyfileContent = None,
             web3: Web3 = None,
-            token_address: Address = None
+            token_address: Address = None,
+            keep_locked: bool = False
     ):
         assert keystore_path or keyfile_path, 'Either a keystore path or keyfile is required.'
         keyfile_exists = bool(keyfile_path) and os.path.exists(keyfile_path)
@@ -67,7 +68,7 @@ class Account(object):
         elif not keyfile_content and password is not None:
             self.create_account(password)
 
-        if self.locked and password is not None:
+        if not keep_locked and self.locked and password is not None:
             self.unlock(password)
 
         assert self.keyfile_content, "Failed to load or generate a keyfile."
@@ -93,13 +94,11 @@ class Account(object):
         assert self.keyfile_content['version'] == 3, 'Older keyfile versions not supported.'
 
     def create_account(self, password: str):
-        self.private_key = keccak(os.urandom(4096))
         self.keyfile_content = create_keyfile_json(
-            self.private_key,
+            keccak(os.urandom(4096)),
             password.encode(),
             iterations=PASSWORD_ITERATIONS
         )
-        self.private_key = encode_hex(self.private_key)
 
     def save_keyfile(self):
         with open(self.keyfile_path, 'w') as keyfile:
@@ -227,7 +226,8 @@ class AccountManagerCLI(AccountManager):
             keystore_path=self.keystore_path,
             password=password,
             web3=self.web3,
-            token_address=self.token_address
+            token_address=self.token_address,
+            keep_locked=True
         )
         self.accounts[account.address] = account
         return account
