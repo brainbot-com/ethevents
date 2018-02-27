@@ -35,19 +35,10 @@ class uCustomSession(uSession):
     def __init__(self, max_rei_per_request: int = 50000, *args, **kwargs) -> None:
         uSession.__init__(self, *args, **kwargs)
         self.max_rei_per_request = max_rei_per_request
-        self.paid = False
 
     def on_http_error(self, method: str, url: str, response: Response, **kwargs) -> bool:
         """Disable retry on error."""
         return False
-
-    def on_init(self, method: str, url: str, **kwargs):
-        uSession.on_init(self, method, url, **kwargs)
-        self.paid = False
-
-    def on_invalid_amount(self, method: str, url: str, response: Response, **kwargs) -> bool:
-        self.paid = False
-        return uSession.on_invalid_amount(self, method, url, response, **kwargs)
 
     def on_payment_requested(self, method: str, url: str, response: Response, **kwargs) -> bool:
         price = int(response.headers[HTTPHeaders.PRICE])
@@ -58,10 +49,7 @@ class uCustomSession(uSession):
             )
             return False
 
-        retry = uSession.on_payment_requested(self, method, url, response, **kwargs)
-        if retry:
-            self.paid = True
-        return retry
+        return uSession.on_payment_requested(self, method, url, response, **kwargs)
 
 
 class App(object):
