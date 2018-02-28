@@ -225,7 +225,7 @@ def test_custom_session_price_cap(
             HTTPHeaders.TOKEN_ADDRESS: token_address,
             HTTPHeaders.CONTRACT_ADDRESS: channel_manager_address,
             HTTPHeaders.RECEIVER_ADDRESS: receiver_address,
-            HTTPHeaders.PRICE: '20001'
+            HTTPHeaders.PRICE: '50001'
         }
 
         url = 'http://{}/something'.format(api_endpoint_address)
