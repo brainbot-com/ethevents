@@ -183,6 +183,7 @@ def test_app_drain(
     assert web3.eth.getBalance(faucet_address) > faucet_wei
 
 
+@pytest.mark.skip(reason='tested mechanism removed, needs a new solution')
 def test_custom_session_already_paid(
         custom_session: uCustomSession,
         token_address: str,
