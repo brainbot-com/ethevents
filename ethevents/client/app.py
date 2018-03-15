@@ -173,12 +173,16 @@ class App(object):
         self.account.sync_balances()
 
         confirm = click.confirm(
-            '{token_balance} {token_symbol} and {eth_balance} ETH (excluding transaction cost) '
-            'will be moved to {to}.\n'
+            '{token_balance} {token_symbol} {and_eth}will be moved to {to}\n'
             'Are you sure you want to proceed?'.format(
                 token_balance=self.account.rei_balance / 10 ** TOKEN_DECIMALS,
                 token_symbol=TOKEN_SYMBOL,
-                eth_balance=self.account.wei_balance / 10 ** 18,
+                and_eth=(
+                    '' if not rdn_and_eth else
+                    'and {eth_balance} ETH (excluding transaction cost) '.format(
+                        eth_balance=self.account.wei_balance / 10 ** 18
+                    )
+                ),
                 to=to
             )
         )
