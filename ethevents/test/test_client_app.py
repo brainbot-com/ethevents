@@ -183,6 +183,7 @@ def test_app_drain(
     assert web3.eth.getBalance(faucet_address) > faucet_wei
 
 
+@pytest.mark.skip(reason='tested mechanism removed, needs a new solution')
 def test_custom_session_already_paid(
         custom_session: uCustomSession,
         token_address: str,
@@ -225,7 +226,7 @@ def test_custom_session_price_cap(
             HTTPHeaders.TOKEN_ADDRESS: token_address,
             HTTPHeaders.CONTRACT_ADDRESS: channel_manager_address,
             HTTPHeaders.RECEIVER_ADDRESS: receiver_address,
-            HTTPHeaders.PRICE: '20001'
+            HTTPHeaders.PRICE: '50001'
         }
 
         url = 'http://{}/something'.format(api_endpoint_address)

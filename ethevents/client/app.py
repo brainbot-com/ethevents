@@ -35,25 +35,12 @@ class uCustomSession(uSession):
     def __init__(self, max_rei_per_request: int = 50000, *args, **kwargs) -> None:
         uSession.__init__(self, *args, **kwargs)
         self.max_rei_per_request = max_rei_per_request
-        self.paid = False
 
     def on_http_error(self, method: str, url: str, response: Response, **kwargs) -> bool:
         """Disable retry on error."""
         return False
 
-    def on_init(self, method: str, url: str, **kwargs):
-        uSession.on_init(self, method, url, **kwargs)
-        self.paid = False
-
-    def on_invalid_amount(self, method: str, url: str, response: Response, **kwargs) -> bool:
-        self.paid = False
-        return uSession.on_invalid_amount(self, method, url, response, **kwargs)
-
     def on_payment_requested(self, method: str, url: str, response: Response, **kwargs) -> bool:
-        if self.paid:
-            log.error('Already paid for requested resource. Aborting.')
-            return False
-
         price = int(response.headers[HTTPHeaders.PRICE])
         if price > self.max_rei_per_request:
             log.error(
@@ -62,10 +49,7 @@ class uCustomSession(uSession):
             )
             return False
 
-        retry = uSession.on_payment_requested(self, method, url, response, **kwargs)
-        if retry:
-            self.paid = True
-        return retry
+        return uSession.on_payment_requested(self, method, url, response, **kwargs)
 
 
 class App(object):
@@ -189,12 +173,16 @@ class App(object):
         self.account.sync_balances()
 
         confirm = click.confirm(
-            '{token_balance} {token_symbol} and {eth_balance} ETH (excluding transaction cost) '
-            'will be moved to {to}.\n'
+            '{token_balance} {token_symbol} {and_eth}will be moved to {to}\n'
             'Are you sure you want to proceed?'.format(
                 token_balance=self.account.rei_balance / 10 ** TOKEN_DECIMALS,
                 token_symbol=TOKEN_SYMBOL,
-                eth_balance=self.account.wei_balance / 10 ** 18,
+                and_eth=(
+                    '' if not rdn_and_eth else
+                    'and {eth_balance} ETH (excluding transaction cost) '.format(
+                        eth_balance=self.account.wei_balance / 10 ** 18
+                    )
+                ),
                 to=to
             )
         )
