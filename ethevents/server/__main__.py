@@ -1,3 +1,5 @@
+from gevent import monkey
+monkey.patch_all()
 import os
 import sys
 import click
@@ -42,8 +44,6 @@ def start(app: PaywalledProxy, host: str, port: int, elasticsearch: str):
 
 
 if __name__ == '__main__':
-    from gevent import monkey
-    monkey.patch_all()
     logging.basicConfig(
         level=logging.DEBUG,
         filename='/tmp/server.log',
