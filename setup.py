@@ -12,6 +12,8 @@ reqs = [req for req in reqs if req and req[0] != '#']
 config = {
     'packages': find_packages(),
     'scripts': [],
+    'use_scm_version': True,
+    'setup_requires': ['setuptools_scm'],
     'name': 'ethevents',
     'entry_points': {
         'console_scripts': [
