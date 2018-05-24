@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="eth.events Block Explorer">
+    <title>eth.events Block Explorer</title>
+    <script src="//code.jquery.com/jquery-latest.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2html/1.2.0/json2html.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+    <script src="queries.js"></script>
+<style>
+#result table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#result td, #result thead {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#result tr:nth-child(even){background-color: #f2f2f2;}
+
+#result tr:hover {background-color: #ddd;}
+
+#result thead {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+.truncate {
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+</head>
+<body>
+    <input id="connection" value="http://localhost:5478"></input>
+    <hr />
+    <input id="usb" value=""></input><input type="button" value="Search" onClick="search()"></input>
+    <hr />
+    <div id="result">
+        <table class="tx"><thead><tr>
+                    <td>FROM</td>
+                    <td>TO</td>
+                    <td>VALUE</td>
+                    <td>GAS USED</td>
+                    <td>GAS PRICE</td>
+                    <td>TX HASH</td>
+                    <td>BLOCK #</td>
+        </tr></thead><tbody></tbody></table>
+        <table class="block"><thead><tr>
+                    <td>NUMBER</td>
+                    <td># TXs</td>
+                    <td>TIME</td>
+                    <td>HASH</td>
+        </tr></thead><tbody></tbody></table>
+    </div>
+
+    <script>
+            $(document).ready(function() {
+                execute_search(latest_block);
+            });
+            function execute_search(query) {
+                connection = $('#connection').val();
+                $.ajax({
+                    type: 'POST',
+                    url: connection + '/ethereum/tx,block/_search',
+                    data: JSON.stringify(query),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(response) {
+                        paste(response);
+                        
+                    }
+                });
+            };
+            function search() {
+                term = $('#usb').val();
+                query = by_hash(term);
+                execute_search(query);
+            };
+            function searchterm(term) {
+                query = by_hash(term);
+                execute_search(query);
+            };
+            function get_tx_for_block(blockhash) {
+                query = {query: {bool: {filter: [
+                    {type: {value: 'tx'}},
+                    {term: {blockHash: blockhash}}
+                ]}}}
+                execute_search(query);
+            };
+            var txtransform = {'<>': 'tr', 'html': [
+                {'<>': 'td', 'html': [
+                    {'<>': 'a', 'href': "javascript:searchterm('${_source.from}')",
+                        'text': '${_source.from}'}
+                ]},
+                {'<>': 'td', 'html': [
+                    {'<>': 'a', 'href': "javascript:searchterm('${_source.to}')",
+                        'text': '${_source.to}'}
+                ]},
+                {'<>': 'td', 'html': '${_source.value.eth}'},
+                {'<>': 'td', 'html': '${_source.gasUsed.num}'},
+                {'<>': 'td', 'html': '${_source.gasPrice.num}'},
+                {'<>': 'td', 'class': 'truncate', 'html': '${_source.hash}'},
+                {'<>': 'td', 'html': '${_source.blockNumber.num}'},
+            ]};
+            var blocktransform = {'<>': 'tr', 'html': [
+                {'<>': 'td', 'html': '${_source.number.num}'},
+                {'<>': 'td', 'html': [
+                    { '<>': 'a', 'href': "javascript:get_tx_for_block('${_source.hash}')",
+                    'text': '${_source.transactions.length}'},
+                ]},
+                {'<>': 'td', 'html': '${_source.timestamp}'},
+                {'<>': 'td', 'class': 'truncate', 'html': '${_source.hash}'},
+                
+            ]};
+            function paste(result) {
+                txs = result.hits.hits.filter(hit => hit._type == 'tx');
+                $('#result table.tx tbody').html('');
+                $('#result table.tx tbody').json2html(txs, txtransform);
+                blocks = result.hits.hits.filter(hit => hit._type == 'block');
+                $('#result table.block tbody').html('');
+                $('#result table.block tbody').json2html(blocks, blocktransform);
+            }
+    </script>
+
+    </body>
+</html>
