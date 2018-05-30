@@ -258,7 +258,6 @@ If we are interested in one type of event (``"Transfer"``), we have to
 introduce another ``"term"`` filter, that gets appended to the
 ``"filter"`` list:
 
-.. TODO isn't recognized as JSON
 
 .. code-block:: json
 
@@ -282,12 +281,13 @@ introduce another ``"term"`` filter, that gets appended to the
   }
 
 
-    The ``”event”`` field defaults to a ``text`` type for full-text
-    searching. We want to match the event name exactly (case sensitive),
-    so we filter for the ``event.keyword`` field, which is of type
-    ``keyword``. To learn more about the differences between ``text``
-    and ``keyword`` types in Elasticsearch, look
-    `here <https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-term-query.html>`__
+
+The ``”event”`` field defaults to a ``text`` type for full-text
+searching. We want to match the event name exactly (case sensitive),
+so we filter for the ``event.keyword`` field, which is of type
+``keyword``. To learn more about the differences between ``text``
+and ``keyword`` types in Elasticsearch, look
+`here <https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-term-query.html>`__
 
 Execute the request with:
 
