@@ -319,7 +319,6 @@ This get's rendered to the ``table.tx`` as multiple rows of
 transactions.
 
 Now, you have seen how simple it is to create a block explorer with
-..  TODO how many lines of code?
-eth.events and xxx lines of code. You can find the finished application
+eth.events and 160 lines of code. You can find the finished application
 code
 `here <https://github.com/brainbot-com/ethevents/tree/master/docs/example-apps/simple-block-explorer>`__.
