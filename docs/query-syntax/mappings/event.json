@@ -1,0 +1,125 @@
+{
+    "ethereum_2": {
+        "mappings": {
+            "event": {
+                "dynamic": "false",
+                "_all": {
+                    "enabled": false
+                },
+                "_parent": {
+                    "type": "tx"
+                },
+                "_routing": {
+                    "required": true
+                },
+                "properties": {
+                    "address": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "args": {
+                        "type": "nested",
+                        "properties": {
+                            "name": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            },
+                            "pos": {
+                                "type": "long"
+                            },
+                            "value": {
+                                "properties": {
+                                    "hex": {
+                                        "type": "keyword",
+                                        "ignore_above": 256
+                                    },
+                                    "num": {
+                                        "type": "long"
+                                    },
+                                    "scaled": {
+                                        "type": "double"
+                                    },
+                                    "type": {
+                                        "type": "keyword",
+                                        "ignore_above": 256
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "blockHash": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "blockNumber": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "error": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "event": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "logIndex": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "str": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "timestamp": {
+                        "type": "date"
+                    },
+                    "transactionHash": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "transactionIndex": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

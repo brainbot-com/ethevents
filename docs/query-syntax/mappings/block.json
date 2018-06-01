@@ -1,0 +1,137 @@
+{
+    "ethereum_2": {
+        "mappings": {
+            "block": {
+                "dynamic": "false",
+                "_all": {
+                    "enabled": false
+                },
+                "properties": {
+                    "difficulty": {
+                        "properties": {
+                            "padded": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "extraData": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "gasLimit": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "gasUsed": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "hash": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "logsBloom": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "miner": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "miningNonce": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "mixHash": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "number": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "parentHash": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "receiptsRoot": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "sha3Uncles": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "size": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "stateRoot": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "timestamp": {
+                        "type": "date"
+                    },
+                    "totalDifficulty": {
+                        "properties": {
+                            "padded": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "transactions": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "transactionsRoot": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "uncles": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    }
+                }
+            }
+        }
+    }
+}

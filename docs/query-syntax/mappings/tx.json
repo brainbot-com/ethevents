@@ -1,0 +1,163 @@
+{
+    "ethereum_2": {
+        "mappings": {
+            "tx": {
+                "dynamic": "false",
+                "_all": {
+                    "enabled": false
+                },
+                "_parent": {
+                    "type": "block"
+                },
+                "_routing": {
+                    "required": true
+                },
+                "properties": {
+                    "blockHash": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "blockNumber": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "contractAddress": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "cumulativeGasUsed": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "from": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "gas": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "gasPrice": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "gasUsed": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "hash": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "input": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "logsBloom": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "nonce": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "r": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "root": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "s": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "status": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "timestamp": {
+                        "type": "date"
+                    },
+                    "to": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "transactionIndex": {
+                        "properties": {
+                            "num": {
+                                "type": "long"
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    },
+                    "v": {
+                        "type": "keyword",
+                        "ignore_above": 256
+                    },
+                    "value": {
+                        "properties": {
+                            "eth": {
+                                "type": "double"
+                            },
+                            "padded": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            },
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

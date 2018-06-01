@@ -15,7 +15,9 @@ Please be patient, thank you!
    :maxdepth: 2
    :caption: Contents:
 
-   tutorials/index
+   client/index
+   server/index
+   query-syntax/index
 
 Indices and tables
 ==================
