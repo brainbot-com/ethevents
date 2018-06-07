@@ -3,8 +3,6 @@ Index endpoints
 
 Eth.events currently has 4 endpoints for the different entities on the Ethereum blockchain:
 
-.. TODO explain briefly
-
 - `block` 
 - `tx`
 - `log`

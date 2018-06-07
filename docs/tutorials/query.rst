@@ -30,18 +30,13 @@ JSON, Rest-APIs and the basic structure of HTTP-requests.
 What you need
 -------------
 
-You don't need any special applications installed for this tutorial,
-since you can use the online HTTP client
-`hurl.it <https://www.hurl.it/>`__ for making the requests to the
-eth.events server. Within the tutorial we provide links for pre-filled
-``hurl.it`` requests
-
-  If you want play around with the HTTP-requests, you can install an
-  HTTP client. For pretty-printed responses in the terminal, we
-  recommend using `HTTPie <https://httpie.org/#installation>`__. For
-  advanced usage and a graphical UI we recommend using
-  `Postman <https://www.getpostman.com/apps>`__. We provide
-  copy-pasteable commands for ``HTTPie``..
+If you want play around with the HTTP-requests, you should install an
+HTTP client. For pretty-printed responses in the terminal, we
+recommend using `HTTPie <https://httpie.org/#installation>`__. For
+advanced usage and a graphical UI we recommend using
+`Postman <https://www.getpostman.com/apps>`__. We provide
+copy-pasteable commands for ``HTTPie`` throughout the tutorial, so if you
+want to follow along, it is advisable to install the software first.
 
 Create an eth.events query step-by-step
 ---------------------------------------
@@ -56,11 +51,6 @@ A simple GET request to ``ethereum/event/_search`` shows us 10 events in
 no particular order.
 
  Execute the request with:
-
--  ``hurl.it``:
-
- `click link <https://www.hurl.it/?method=GET&username=demouser&password=demouser&url=https://public.eth.events/ethereum/event/_search>`__
-
 
 -  ``HTTPie``:
 
@@ -193,11 +183,6 @@ body of the HTTP-request:
 
 Execute the request with:
 
--  ``hurl.it``:
-
-   `click
-   link <https://www.hurl.it/?method=POST&username=demouser&password=demouser&url=https://public.eth.events/ethereum/event/_search&headers=%7B%22Content-Type%22:%5B%22application/json;charset=utf-8%22%5D%7D&body=%7B%22query%22:%7B%22bool%22:%7B%22filter%22:%7B%22term%22:%7B%22address%22:%220x89d24a6b4ccb1b6faa2625fe562bdd9a23260359%22%7D%7D%7D%7D%7D>`__
-
 -  ``HTTPie``:
 
   .. code:: bash
@@ -291,11 +276,6 @@ and ``keyword`` types in Elasticsearch, look
 
 Execute the request with:
 
--  ``hurl.it``:
-
-   `click
-   link <https://www.hurl.it/?method=POST&username=demouser&password=demouser&url=https://public.eth.events/ethereum/event/_search&headers=%7B%22Content-Type%22:%5B%22application/json;charset=utf-8%22%5D%7D&body=%7B%22query%22:%7B%22bool%22:%7B%22filter%22:%5B%7B%22term%22:%7B%22event.keyword%22:%22Transfer%22%7D%7D,%7B%22term%22:%7B%22address%22:%220x89d24a6b4ccb1b6faa2625fe562bdd9a23260359%22%7D%7D%5D%7D%7D%7D>`__
-
 -  ``HTTPie``:
 
   .. code:: bash
@@ -353,11 +333,6 @@ With ``"order":"desc"``, the events will be sorted in descending order
 of the block, where they were included in the blockchain.
 
 Execute the request with:
-
--  ``hurl.it``:
-
-   `click
-   link <https://www.hurl.it/?method=POST&username=demouser&password=demouser&url=https://public.eth.events/ethereum/event/_search&headers=%7B%22Content-Type%22:%5B%22application/json;charset=utf-8%22%5D%7D&body=%7B%22query%22:%7B%22bool%22:%7B%22filter%22:%5B%7B%22term%22:%7B%22event.keyword%22:%22Transfer%22%7D%7D,%7B%22term%22:%7B%22address%22:%220x89d24a6b4ccb1b6faa2625fe562bdd9a23260359%22%7D%7D%5D%7D%7D,%22sort%22:%7B%22blockNumber.num%22:%7B%22order%22:%22desc%22%7D%7D,%22size%22:5%7D>`__
 
 -  ``HTTPie``:
 
