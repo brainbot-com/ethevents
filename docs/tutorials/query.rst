@@ -32,7 +32,7 @@ What you need
 
 If you want play around with the HTTP-requests, you should install an
 HTTP client. For pretty-printed responses in the terminal, we
-recommend using `HTTPie <https://httpie.org/#installation>`__. For
+recommend using `HTTPie <https://httpie.org/doc#installation>`__. For
 advanced usage and a graphical UI we recommend using
 `Postman <https://www.getpostman.com/apps>`__. We provide
 copy-pasteable commands for ``HTTPie`` throughout the tutorial, so if you
