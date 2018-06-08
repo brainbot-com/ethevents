@@ -372,6 +372,3 @@ possibilities of
 The example queries at `http://eth.events <https://eth.events>`__ make
 extensive use of aggregations and show how eth.events can be used to
 plot various metrics of different smart contracts.
-
-For more information on the specifics of eth.events, please refer to the
-`documentation <https://github.com/brainbot-com/ethevents/tree/master/docs>`__
