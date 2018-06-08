@@ -4,7 +4,7 @@ Data types
 Elasticsearch types
 ~~~~~~~~~~~~~~~~~~~
 
-All the types from the blokchain as well as their encodings have to be represented with a Elasticsearch type
+All the types from the blockchain as well as their encodings have to be represented with a Elasticsearch type
 for indexing and searching. Most blockchain types that are no number types are represented as a string in Elasticsearch (`keyword` or `text` type).
 
 To learn more about the types in Elasticsearch, visit their `documentation <https://www.elastic.co/guide/en/elasticsearch/reference/5.6/mapping-types.html>`__.

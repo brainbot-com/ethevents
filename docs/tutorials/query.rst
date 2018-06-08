@@ -47,7 +47,7 @@ Retrieve all events indexed by eth.events
 On the eth.events endpoint ``/events/_search``, you are able to query
 all events from the Ethereum mainnet.
 
-A simple GET request to ``ethereum/event/_search`` shows us 10 events in
+A simple GET request to ``/ethereum/event/_search`` shows us 10 events in
 no particular order.
 
  Execute the request with:
