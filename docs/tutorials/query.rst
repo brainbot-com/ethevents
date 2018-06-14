@@ -272,7 +272,7 @@ searching. We want to match the event name exactly (case sensitive),
 so we filter for the ``event.keyword`` field, which is of type
 ``keyword``. To learn more about the differences between ``text``
 and ``keyword`` types in Elasticsearch, look
-`here <https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-term-query.html>`__
+`here <https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-term-query.html>`__.
 
 Execute the request with:
 
