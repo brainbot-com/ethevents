@@ -1,0 +1,26 @@
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "match_all": {}
+        },
+        {
+          "has_child": {
+            "type": "tx",
+            "query": {
+              "match_all": {}
+            },
+            "inner_hits": {
+              "size": 10
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "number.num": "desc"
+  },
+  "size": 1
+}

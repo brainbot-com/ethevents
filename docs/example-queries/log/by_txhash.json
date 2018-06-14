@@ -1,0 +1,14 @@
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "transactionHash": "0x679ec8e6e55a129c8f6b055150033dcb6de0192c07e6e06d2a14113aa0df15b3" 
+          }
+        }
+      ]
+    }
+  },
+  "size": 20
+}

@@ -1,0 +1,11 @@
+{
+  "query": {
+    "bool": {
+      "must_not": {
+        "exists": {
+          "field": "transactions"
+        }
+      }
+    }
+  }
+}

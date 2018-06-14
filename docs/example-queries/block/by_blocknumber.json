@@ -1,0 +1,11 @@
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "term": {
+          "number.num": 42
+        }
+      }
+    }
+  }
+}

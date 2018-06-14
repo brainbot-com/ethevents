@@ -1,0 +1,17 @@
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "range": {
+            "blockNumber.num": {
+              "gte": 4242,
+              "lte": 5353
+            }
+          }
+        }
+      ]
+    }
+  },
+  "size": 200
+}

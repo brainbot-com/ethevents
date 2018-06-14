@@ -1,0 +1,25 @@
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "has_parent": {
+            "type": "tx",
+            "query": {
+              "bool": {
+                "filter": [
+                  {
+                    "term": {
+                      "from": "0x44b7b4777ec399bc4a9b5621dcabc8ea9612b5fd" 
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "size": 200
+}
