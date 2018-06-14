@@ -14,12 +14,12 @@ endpoint.
 We assume, that you know how to write ‘eth.events’ ElasticSearch
 queries. For more information on how to construct ``eth.events``
 elasticsearch queries, have a look
-`here <TODO%20crosslink%20to%20query%20tutorial>`__.
+`here <https://ethevents.readthedocs.io/en/latest/tutorials/query.html>`__.
 
 We keep it fairly simple by using plain JavaScript (*JS*), jQuery and
 the ``json2html`` templating library.
 
-You can find the finished application code `here <TODO>`__.
+You can find the finished application code `here <https://github.com/brainbot-com/ethevents/tree/master/docs/example-apps/simple-block-explorer>`__.
 
 Our application consists of only two files:
 
@@ -217,7 +217,7 @@ called with the servers response.
 
 To get more information on how the result is structured, please refer to
 the
-`documentation <https://github.com/brainbot-com/ethevents/tree/master/docs>`__
+`documentation <https://github.com/brainbot-com/ethevents/tree/master/docs>`__.
 
 Populating the HTML tables
 --------------------------
@@ -251,7 +251,7 @@ contains the skeleton of the transaction tables rows:
 
 For the specifics of the ``json2html`` templating syntax, please refer
 to the `documentation <http://json2html.com/docs/>`__. Here the string
-literals will get parsed.The text inside the curly bracket notation will
+literals will get parsed. The text inside the curly bracket notation will
 be interpreted as parameters. It will get substituted with the
 parameter's value later on.
 
